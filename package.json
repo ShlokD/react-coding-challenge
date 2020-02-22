@@ -1,0 +1,35 @@
+{
+  "name": "react-coding-challenge",
+  "version": "1.0.0",
+  "description": "> Welcome to the Stan Coding Challenge!",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShlokD/react-coding-challenge.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ShlokD/react-coding-challenge/issues"
+  },
+  "homepage": "https://github.com/ShlokD/react-coding-challenge#readme",
+  "dependencies": {
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-react": "^7.8.3",
+    "@testing-library/react": "^9.4.0",
+    "jest": "^25.1.0",
+    "parcel-bundler": "^1.12.4"
+  }
+}
