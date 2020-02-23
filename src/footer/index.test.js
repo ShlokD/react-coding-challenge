@@ -21,7 +21,7 @@ describe("Footer component", () => {
   test("it renders the copyright statement", () => {
     expect(
       component.getByText("Copyright © Stream-It-Now. All Rights Reserved.")
-    );
+    ).toBeDefined()
   });
 
   test("it renders the social links", () => {
