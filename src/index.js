@@ -16,9 +16,9 @@ import Header from "./header";
 import Footer from "./footer";
 
 import Home from "./subapps/home";
+import Series from "./subapps/series";
+import Movies from "./subapps/movies"
 
-const Series = lazy(() => import("./subapps/series"));
-const Movies = lazy(() => import("./subapps/movies"));
 
 class ScreensApp extends Component {
   constructor(props) {
@@ -66,7 +66,7 @@ class ScreensApp extends Component {
       { url: PlayStore, alt: "Play Store Icon", height: 96, width: 96 },
       {
         url: WindowsStore,
-        alt: "Windoes Store Icon",
+        alt: "Windows Store Icon",
         height: 96,
         width: 96
       }
