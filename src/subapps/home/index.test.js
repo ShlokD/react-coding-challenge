@@ -1,5 +1,6 @@
 import React from "react";
 import Home from "./index";
+import { BrowserRouter } from "react-router-dom";
 import { render } from "@testing-library/react";
 
 describe("Home Page", () => {
@@ -11,16 +12,18 @@ describe("Home Page", () => {
         title: "Series",
         imageUrl: "some-series-img",
         imageAlt: "series image",
-        subtitle: "Popular Series"
+        subtitle: "Popular Series",
+        redirectUrl: "/series"
       },
       {
         title: "Movies",
         imageUrl: "some-movies-img",
         imageAlt: "movies image",
-        subtitle: "Popular Movies"
+        subtitle: "Popular Movies",
+        redirectUrl: "/movies"
       }
     ];
-    component = render(<Home options={options} />);
+    component = render(<BrowserRouter><Home options={options} /></BrowserRouter>);
   });
 
   test("it renders two cards", () => {
@@ -29,7 +32,7 @@ describe("Home Page", () => {
 
   test("it renders a series card", () => {
     expect(component.getByText("Popular Series")).toBeDefined();
-  });
+  }); 
 
   test("it renders a movies cards", () => {
     expect(component.getByText("Popular Movies")).toBeDefined();
