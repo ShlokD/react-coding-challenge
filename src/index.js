@@ -16,8 +16,7 @@ import Header from "./header";
 import Footer from "./footer";
 
 import Home from "./subapps/home";
-import Series from "./subapps/series";
-import Movies from "./subapps/movies";
+import Details from "./subapps/details";
 
 class ScreensApp extends Component {
   constructor(props) {
@@ -80,10 +79,10 @@ class ScreensApp extends Component {
             <Home options={this.homeOptions} />
           </Route>
           <Route path="/series">
-            <Series />
+            <Details type="series" />
           </Route>
           <Route path="/movies">
-            <Movies />
+            <Details type="movie" />
           </Route>
           <Footer
             socialIcons={this.socialIcons}

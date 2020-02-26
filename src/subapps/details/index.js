@@ -5,13 +5,14 @@ export default class extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      series: [],
+      streamItems: [],
       uiState: "DONE"
     };
   }
 
   componentDidMount() {
-    if (this.state.series.length === 0) {
+    if (this.state.streamItems.length === 0) {
+      const { type } = this.props;
       this.setState({
         uiState: "LOADING"
       });
@@ -20,11 +21,11 @@ export default class extends Component {
       )
         .then(response => response.json())
         .then(responseJSON => {
-          const series = responseJSON.entries.filter(
-            entry => entry.programType === "series"
+          const streamItems = responseJSON.entries.filter(
+            entry => entry.programType === type
           );
           this.setState({
-            series,
+            streamItems,
             uiState: "DONE"
           });
         })
@@ -37,15 +38,16 @@ export default class extends Component {
   }
 
   render() {
-    const isLoading = this.state.uiState === "LOADING";
+    const { uiState, streamItems } = this.state;
+    const isLoading = uiState === "LOADING";
 
     return (
       <div className="flex flex-wrap">
         <p className={`${isLoading ? "opacity-100" : "opacity-0"} p-4 text-lg`}>
           Loading...
         </p>
-        {this.state.series.map((series, index) => (
-          <InfoCard key={`series-${index}`} {...series} />
+        {streamItems.map((streamItem, index) => (
+          <InfoCard key={`info-${index}`} {...streamItem} />
         ))}
       </div>
     );
