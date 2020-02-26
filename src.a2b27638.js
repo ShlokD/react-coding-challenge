@@ -36232,7 +36232,7 @@ function (_Component) {
     value: function render() {
       return _react.default.createElement("div", {
         className: "w-full h-full"
-      }, _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement(_header.default, null), _react.default.createElement(_reactRouterDom.Route, {
+      }, _react.default.createElement(_reactRouterDom.HashRouter, null, _react.default.createElement(_header.default, null), _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
         path: "/"
       }, _react.default.createElement(_home.default, {
@@ -36282,7 +36282,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60240" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60523" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
