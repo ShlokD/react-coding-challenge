@@ -36239,13 +36239,9 @@ function (_Component) {
         options: this.homeOptions
       })), _react.default.createElement(_reactRouterDom.Route, {
         path: "/series"
-      }, _react.default.createElement(_react.Suspense, {
-        fallback: _react.default.createElement("div", null, "Loading...")
-      }, _react.default.createElement(_series.default, null))), _react.default.createElement(_reactRouterDom.Route, {
+      }, _react.default.createElement(_series.default, null)), _react.default.createElement(_reactRouterDom.Route, {
         path: "/movies"
-      }, _react.default.createElement(_react.Suspense, {
-        fallback: _react.default.createElement("div", null, "Loading...")
-      }, _react.default.createElement(_movies.default, null))), _react.default.createElement(_footer.default, {
+      }, _react.default.createElement(_movies.default, null)), _react.default.createElement(_footer.default, {
         socialIcons: this.socialIcons,
         appStoreIcons: this.appStoreIcons
       })));
@@ -36286,7 +36282,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57053" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59628" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
