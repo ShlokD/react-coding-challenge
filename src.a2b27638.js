@@ -35929,7 +35929,7 @@ var InfoCard = function InfoCard(props) {
 };
 
 exports.InfoCard = InfoCard;
-},{"react":"node_modules/react/index.js"}],"src/subapps/series/index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js"}],"src/subapps/details/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -35977,7 +35977,8 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(_default).call(this, props));
     _this.state = {
-      series: []
+      streamItems: [],
+      uiState: "DONE"
     };
     return _this;
   }
@@ -35987,122 +35988,44 @@ function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      fetch("https://raw.githubusercontent.com/StreamCo/react-coding-challenge/master/feed/sample.json").then(function (response) {
-        return response.json();
-      }).then(function (responseJSON) {
-        var series = responseJSON.entries.filter(function (entry) {
-          return entry.programType === "series";
+      if (this.state.streamItems.length === 0) {
+        var type = this.props.type;
+        this.setState({
+          uiState: "LOADING"
         });
+        fetch("https://raw.githubusercontent.com/StreamCo/react-coding-challenge/master/feed/sample.json").then(function (response) {
+          return response.json();
+        }).then(function (responseJSON) {
+          var streamItems = responseJSON.entries.filter(function (entry) {
+            return entry.programType === type;
+          });
 
-        _this2.setState({
-          series: series
+          _this2.setState({
+            streamItems: streamItems,
+            uiState: "DONE"
+          });
+        }).catch(function (err) {
+          _this2.setState({
+            uiState: "DONE"
+          });
         });
-      }).catch(function (err) {
-        _this2.setState({
-          error: true
-        });
-      });
+      }
     }
   }, {
     key: "render",
     value: function render() {
+      var _this$state = this.state,
+          uiState = _this$state.uiState,
+          streamItems = _this$state.streamItems;
+      var isLoading = uiState === "LOADING";
       return _react.default.createElement("div", {
         className: "flex flex-wrap"
-      }, this.state.series.map(function (series, index) {
+      }, _react.default.createElement("p", {
+        className: "".concat(isLoading ? "opacity-100" : "opacity-0", " p-4 text-lg")
+      }, "Loading..."), streamItems.map(function (streamItem, index) {
         return _react.default.createElement(_index.InfoCard, _extends({
-          key: "series-".concat(index)
-        }, series));
-      }));
-    }
-  }]);
-
-  return _default;
-}(_react.Component);
-
-exports.default = _default;
-},{"react":"node_modules/react/index.js","../../common/components/index":"src/common/components/index.js"}],"src/subapps/movies/index.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-var _index = require("../../common/components/index");
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-var _default =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(_default, _Component);
-
-  function _default(props) {
-    var _this;
-
-    _classCallCheck(this, _default);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(_default).call(this, props));
-    _this.state = {
-      movies: []
-    };
-    return _this;
-  }
-
-  _createClass(_default, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
-
-      fetch("https://raw.githubusercontent.com/StreamCo/react-coding-challenge/master/feed/sample.json").then(function (response) {
-        return response.json();
-      }).then(function (responseJSON) {
-        var movies = responseJSON.entries.filter(function (entry) {
-          return entry.programType === "movie";
-        });
-
-        _this2.setState({
-          movies: movies
-        });
-      }).catch(function (err) {
-        _this2.setState({
-          error: true
-        });
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return _react.default.createElement("div", {
-        className: "flex flex-wrap"
-      }, this.state.movies.map(function (movie, index) {
-        return _react.default.createElement(_index.InfoCard, _extends({
-          key: "series-".concat(index)
-        }, movie));
+          key: "info-".concat(index)
+        }, streamItem));
       }));
     }
   }]);
@@ -36140,9 +36063,7 @@ var _footer = _interopRequireDefault(require("./footer"));
 
 var _home = _interopRequireDefault(require("./subapps/home"));
 
-var _series = _interopRequireDefault(require("./subapps/series"));
-
-var _movies = _interopRequireDefault(require("./subapps/movies"));
+var _details = _interopRequireDefault(require("./subapps/details"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -36239,9 +36160,13 @@ function (_Component) {
         options: this.homeOptions
       })), _react.default.createElement(_reactRouterDom.Route, {
         path: "/series"
-      }, _react.default.createElement(_series.default, null)), _react.default.createElement(_reactRouterDom.Route, {
+      }, _react.default.createElement(_details.default, {
+        type: "series"
+      })), _react.default.createElement(_reactRouterDom.Route, {
         path: "/movies"
-      }, _react.default.createElement(_movies.default, null)), _react.default.createElement(_footer.default, {
+      }, _react.default.createElement(_details.default, {
+        type: "movie"
+      })), _react.default.createElement(_footer.default, {
         socialIcons: this.socialIcons,
         appStoreIcons: this.appStoreIcons
       })));
@@ -36254,7 +36179,7 @@ function (_Component) {
 var App = document.getElementById("app");
 
 _reactDom.default.render(_react.default.createElement(ScreensApp, null), App);
-},{"react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../assets/social/facebook-white.svg":"assets/social/facebook-white.svg","../assets/social/twitter-white.svg":"assets/social/twitter-white.svg","../assets/social/instagram-white.svg":"assets/social/instagram-white.svg","../assets/store/app-store.svg":"assets/store/app-store.svg","../assets/store/play-store.svg":"assets/store/play-store.svg","../assets/store/windows-store.svg":"assets/store/windows-store.svg","../assets/placeholder.png":"assets/placeholder.png","./header":"src/header/index.js","./footer":"src/footer/index.js","./subapps/home":"src/subapps/home/index.js","./subapps/series":"src/subapps/series/index.js","./subapps/movies":"src/subapps/movies/index.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","react-router-dom":"node_modules/react-router-dom/esm/react-router-dom.js","../assets/social/facebook-white.svg":"assets/social/facebook-white.svg","../assets/social/twitter-white.svg":"assets/social/twitter-white.svg","../assets/social/instagram-white.svg":"assets/social/instagram-white.svg","../assets/store/app-store.svg":"assets/store/app-store.svg","../assets/store/play-store.svg":"assets/store/play-store.svg","../assets/store/windows-store.svg":"assets/store/windows-store.svg","../assets/placeholder.png":"assets/placeholder.png","./header":"src/header/index.js","./footer":"src/footer/index.js","./subapps/home":"src/subapps/home/index.js","./subapps/details":"src/subapps/details/index.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -36282,7 +36207,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60523" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61871" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
