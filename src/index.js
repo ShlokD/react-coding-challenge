@@ -1,6 +1,6 @@
-import React, { Component, lazy, Suspense } from "react";
+import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Route } from "react-router-dom";
+import { Route, BrowserRouter } from "react-router-dom";
 
 import FacebookWhiteIcon from "../assets/social/facebook-white.svg";
 import TwitterWhiteIcon from "../assets/social/twitter-white.svg";
@@ -17,8 +17,7 @@ import Footer from "./footer";
 
 import Home from "./subapps/home";
 import Series from "./subapps/series";
-import Movies from "./subapps/movies"
-
+import Movies from "./subapps/movies";
 
 class ScreensApp extends Component {
   constructor(props) {
@@ -82,14 +81,10 @@ class ScreensApp extends Component {
             <Home options={this.homeOptions} />
           </Route>
           <Route path="/series">
-            <Suspense fallback={<div>Loading...</div>}>
-              <Series />
-            </Suspense>
+            <Series />
           </Route>
           <Route path="/movies">
-            <Suspense fallback={<div>Loading...</div>}>
-              <Movies />
-            </Suspense>
+            <Movies />
           </Route>
           <Footer
             socialIcons={this.socialIcons}
