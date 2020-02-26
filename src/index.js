@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import { Route, BrowserRouter } from "react-router-dom";
+import { Route, HashRouter } from "react-router-dom";
 
 import FacebookWhiteIcon from "../assets/social/facebook-white.svg";
 import TwitterWhiteIcon from "../assets/social/twitter-white.svg";
@@ -74,10 +74,9 @@ class ScreensApp extends Component {
   render() {
     return (
       <div className="w-full h-full">
-        <BrowserRouter>
+        <HashRouter>
           <Header />
-
-          <Route path="/" exact>
+          <Route exact path="/">
             <Home options={this.homeOptions} />
           </Route>
           <Route path="/series">
@@ -90,7 +89,7 @@ class ScreensApp extends Component {
             socialIcons={this.socialIcons}
             appStoreIcons={this.appStoreIcons}
           />
-        </BrowserRouter>
+        </HashRouter>
       </div>
     );
   }
